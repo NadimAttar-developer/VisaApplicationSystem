@@ -1,0 +1,168 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using VisaApplicationAPI.ViewModels.Applicant
+@model ApplicantViewModel
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="new_applicant_btn">Create New Applicant</button>
+        </div>
+    </div>
+    <h2>Applicants Information</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Visa Type</th>
+                <th>Application Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var applicant in Model.ApplicantsInfoViewModel)
+            {
+                <tr>
+                    <td>@applicant.FirstName</td>
+                    <td>@applicant.LastName</td>
+                    <td>@applicant.Age</td>
+                    <td>@applicant.Country</td>
+                    <td>@applicant.City</td>
+                    <td>@applicant.VisaType</td>
+                    <td>@applicant.Active</td>
+                    <td>
+                        <input type="file" id="fileInput" style="display:none;" multiple />
+                        <button type="button" class="btn btn-primary btn-sm" onclick="selectDocuments('@applicant.Id')">Documents</button>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="editApplicant('@applicant.Id')">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+<!-- Create Applicant Modal -->
+<div class="modal" id="createApplicantModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Applicant</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Action" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" class="form-control" id="firstName" name="FirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" class="form-control" id="lastName" name="LastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="text" class="form-control" id="age" name="Age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country:</label>
+                        <input type="text" class="form-control" id="country" name="Country" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <input type="text" class="form-control" id="city" name="City" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="visaType">Visa Type:</label>
+                        <select class="form-control" id="visaType" name="VisaTypeId">
+                            @foreach (var visaType in Model.VisaTypesViewModel)
+                            {
+                                <option value="@visaType.Id">@visaType.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="visaType">Choose User:</label>
+                        <select class="form-control" id="user" name="UserId">
+                            @foreach (var user in Model.UsersViewModel)
+                            {
+                                <option value="@user.Id">@user.UserName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="applicantStatus" name="ApplicantStatus">
+                        <label class="form-check-label" for="applicantStatus">Applicant Status</label>
+                        <input type="hidden" name="ApplicantStatus" value="false">
+                    </div>
+                    <div class="form-group mt-3" style="text-align:right!important">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#new_applicant_btn").click(function (e) {
+                $('#createApplicantModal').modal('show');
+            })
+        });
+
+        function editApplicant(id) {
+            window.location.href = '/Applicant/ApplicantDetails/?id=' + id;
+        }
+
+        function selectDocuments(applicantId) {
+            // Trigger file input click
+            $("#fileInput").click();
+
+            // Handle file selection change
+            $("#fileInput").change(function () {
+                var formData = new FormData();
+
+                // Append each selected file to FormData
+                var files = $("#fileInput")[0].files;
+                for (var i = 0; i < files.length; i++) {
+                    formData.append("documents", files[i]);
+                }
+
+                // Append other data, like applicantId
+                formData.append("applicantId", applicantId);
+
+                // Send Ajax request
+                $.ajax({
+                    url: '/Applicant/UploadDocuments',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (result) {
+                        // Handle success
+                        alert("Documents uploaded successfully");
+                    },
+                    error: function (error) {
+                        // Handle error
+                        console.error(error);
+                    }
+                });
+            });
+        }
+
+    </script>
+}

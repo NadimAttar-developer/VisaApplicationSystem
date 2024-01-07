@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using VisaApplicationAPI.ViewModels.VisaType;
+@model List<VisaTypeViewModel>
+
+<div class="container mt-4">
+    <h2>Visa Types</h2>
+
+    <div class="row">
+
+        @foreach (var visaType in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@visaType.Name</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

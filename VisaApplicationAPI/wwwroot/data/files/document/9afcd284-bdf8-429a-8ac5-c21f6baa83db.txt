@@ -1,0 +1,72 @@
+--INSERT INTO Shariki_Applications_Matching (id, personal_user_id, expected_user_id, criteria, is_matching)
+
+DECLARE @lastId INT;
+SELECT @lastId = ISNULL(MAX(id), 0) FROM Shariki_Applications_Matching;
+
+-- Get the last identity value inserted into the table
+SELECT
+	@lastId + ROW_NUMBER() OVER (ORDER BY (SELECT NULL)),
+    Users1.id AS personal_user_id,
+    Users2.id AS expected_user_id,
+    C.id as criteria,
+    CASE 
+        WHEN C.id = 1 AND (E.is_age_does_not_matter = 1 or P.age BETWEEN E.min_age and E.max_age)  THEN 1
+		WHEN C.id = 2 AND ((P.ideology in (select ideology_id from Shariki_Expected_Selection_Data where expected_id = E.id)) or (E.is_ideology_does_not_matter = 1)) THEN 1
+		WHEN C.id = 3 AND (E.non_arab_origin = -1 or P.is_non_arab_origin = E.non_arab_origin) THEN 1
+		WHEN C.id = 4 AND (P.height BETWEEN E.min_height AND E.max_height or E.is_height_does_not_matter = 1) THEN 1
+		WHEN C.id = 5 AND (P.weight BETWEEN E.min_weight AND E.max_weight or E.is_weight_does_not_matter = 1) THEN 1
+		WHEN C.id = 6 AND (E.is_skin_color_does_not_matter = 1 or P.skin_color in 
+		(select S.skin_color_id from  [Shariki_DB].[dbo].[Shariki_Expected_Selection_Data] S where E.id = S.expected_id )) THEN 1
+		WHEN C.id = 7 AND (E.is_smoking = -1 or P.is_smoking = E.is_smoking) THEN 1
+		WHEN C.id = 8 AND (E.is_religious = -1 or P.is_religious = E.is_religious) THEN 1
+		WHEN C.id = 9 AND (E.is_commitment_to_customs_and_traditions = -1 or P.is_commitment_to_customs_and_traditions = E.is_commitment_to_customs_and_traditions) THEN 1
+		WHEN C.id = 10 AND ((E.is_educational_level_does_not_matter = 1) or (P.educational_level in 
+		(select educational_level_id from Shariki_Expected_Selection_Data where E.id = expected_id))) THEN 1
+		WHEN C.id = 11 AND ((E.is_marital_status_does_not_matter = 1) or (P.marital_status in 
+		(select marital_status_id from Shariki_Expected_Selection_Data where E.id = expected_id))) THEN 1
+		WHEN C.id = 12 AND (P.is_children_need_to_live_with_new_person = E.is_children_need_to_live_with_new_person) THEN 1
+		WHEN C.id = 13 AND (E.is_wearing_abaya = -1 or P.is_wearing_abaya = E.is_wearing_abaya) THEN 1
+		WHEN C.id = 14 AND ((E.is_abaya_type_does_not_matter = 1) or (P.abaya_type in 
+		(select abaya_type_id from Shariki_Expected_Selection_Data where E.id = expected_id))) THEN 1
+		WHEN C.id = 15 AND ((E.is_abaya_color_does_not_matter = 1) or (P.abaya_color in 
+		(select abaya_color_id from Shariki_Expected_Selection_Data where expected_id = E.id))) THEN 1
+		WHEN C.id = 16 AND ((E.is_place_of_wearing_abaya_does_not_matter = 1) or (P.place_of_wearing_abaya in 
+		(select place_of_wearing_abaya_type_id from Shariki_Expected_Selection_Data where expected_id = E.id))) THEN 1
+		WHEN C.id = 17 AND (E.is_wearing_abaya_on_traveling = -1 or P.is_wearing_abaya_on_traveling = E.is_wearing_abaya_on_traveling) THEN 1
+		WHEN C.id = 18 AND (E.is_wearing_hijab = -1 or P.is_wearing_hijab = E.is_wearing_hijab) THEN 1
+		WHEN C.id = 19 AND ((E.is_hijab_type_does_not_matter = 1) or (P.hijab_type in 
+		(select hijab_id from Shariki_Expected_Selection_Data where expected_id = E.id))) THEN 1
+		WHEN C.id = 20 AND (E.is_using_makeup = -1 or P.is_using_makeup = E.is_using_makeup) THEN 1
+		WHEN C.id = 21 AND ((E.is_place_of_using_makeup_does_not_matter = 1) or (P.place_of_using_makeup in 
+		(select place_of_using_makeup_id from Shariki_Expected_Selection_Data where expected_id = E.id))) THEN 1
+		WHEN C.id = 22 AND ((E.is_way_of_using_makeup_does_not_matter = 1) or (P.way_of_using_makeup in 
+		(select way_of_using_makeup_id from Shariki_Expected_Selection_Data where expected_id = E.id))) THEN 1
+		WHEN C.id = 23 AND (E.is_cooking = -1 or P.is_cooking = E.is_cooking) THEN 1
+		WHEN C.id = 24 AND (P.cooking_percentage = E.cooking_percentage) THEN 1
+		WHEN C.id = 25 AND (E.is_license = -1 or P.is_license = E.is_license) THEN 1
+		WHEN C.id = 26 AND (E.health_status = -1 or P.is_health_status = E.health_status) THEN 1
+        ELSE 0 
+    END AS is_matching
+FROM
+    [Shariki_DB].[dbo].[Shariki_Peronal_Information] P
+CROSS JOIN
+    [Shariki_DB].[dbo].[Shariki_Expected_Information] E
+CROSS JOIN
+    [Shariki_DB].[dbo].[Shariki_Criteria] C
+	JOIN 
+	AspNetUsers Users1 ON Users1.id = P.profile_sid
+	JOIN
+	AspNetUsers Users2 ON Users2.id = E.profile_sid
+
+	WHERE 
+	(P.profile_sid = '8fc61065-71c8-4f5c-a0da-cda96e5ed39b' AND P.is_submitted = 1 
+	AND E.profile_sid != '8fc61065-71c8-4f5c-a0da-cda96e5ed39b' AND E.is_submitted = 1 
+	AND ((P.gender = 'F' AND E.gender = 'M') OR (P.gender = 'M' AND E.gender = 'F')))
+	OR
+	((P.profile_sid != '8fc61065-71c8-4f5c-a0da-cda96e5ed39b' AND P.is_submitted = 1 
+	AND E.profile_sid = '8fc61065-71c8-4f5c-a0da-cda96e5ed39b' AND E.is_submitted = 1 
+	AND ((P.gender = 'F' AND E.gender = 'M') OR (P.gender = 'M' AND E.gender = 'F'))))
+--WHERE
+--(P.gender = 'M' AND E.gender = 'F' AND P.is_submitted = 1 AND E.is_submitted = 1)
+--OR
+--(P.gender = 'F' AND E.gender = 'M' AND P.is_submitted = 1 AND E.is_submitted = 1)

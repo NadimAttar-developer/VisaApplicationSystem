@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplicationAPI", "VisaApplicationAPI\VisaApplicationAPI.csproj", "{47D0E22C-92A1-4320-B4FB-E5636FC88560}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{69F2289C-16AB-42D0-B1D9-F44F0D6B0ACE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BoundedContext", "BoundedContext", "{9AA7251B-D1AE-4ACF-90FA-52120BABA6EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{13A3A997-C3D9-4FD6-A7E7-FA8EF9130D55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seeder", "Seeder", "{D5CCEDDB-8CDC-4038-9A69-6BCAF6996D4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedKernal", "SharedKernal", "{B2586615-9306-4648-9D53-EB4CA947ACD2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{D729781A-C163-48A4-B538-C2157A9BF613}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplicationBase", "..\..\Test Project\VisaApplicationAPI\VisaApplicationBase\VisaApplicationBase.csproj", "{FE18728B-1E74-44A5-A4B6-03B1C85CB682}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplication.Service", "..\..\Test Project\VisaApplicationAPI\VisaApplication.Service\VisaApplication.Service.csproj", "{C00C1096-CEF6-4070-B2A3-E6589DD54849}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplication.Model", "..\..\Test Project\VisaApplicationAPI\VisaApplication.Model\VisaApplication.Model.csproj", "{71F153F2-5BD5-4AA2-B8E0-0D144EC560E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplication.SqlServer", "..\..\Test Project\VisaApplicationAPI\VisaApplication.SqlServer\VisaApplication.SqlServer.csproj", "{FA6B7AFB-92A7-4B50-B071-A7C69A54AF35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplication.Seeder", "..\..\Test Project\VisaApplicationAPI\VisaApplication.Seeder\VisaApplication.Seeder.csproj", "{ECDB85C9-7471-4C1A-AA87-B018E0080D68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplication.SharedKernal", "..\..\Test Project\VisaApplicationAPI\VisaApplication.SharedKernal\VisaApplication.SharedKernal.csproj", "{86A2F49C-A3E1-4592-A095-FA28FA7D5021}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisaApplicationSharedUI", "..\..\Test Project\VisaApplicationAPI\VisaApplicationSharedUI\VisaApplicationSharedUI.csproj", "{707B4A79-5E26-4D72-B152-C3A4250F3EF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47D0E22C-92A1-4320-B4FB-E5636FC88560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47D0E22C-92A1-4320-B4FB-E5636FC88560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47D0E22C-92A1-4320-B4FB-E5636FC88560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47D0E22C-92A1-4320-B4FB-E5636FC88560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE18728B-1E74-44A5-A4B6-03B1C85CB682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE18728B-1E74-44A5-A4B6-03B1C85CB682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE18728B-1E74-44A5-A4B6-03B1C85CB682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE18728B-1E74-44A5-A4B6-03B1C85CB682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C00C1096-CEF6-4070-B2A3-E6589DD54849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C00C1096-CEF6-4070-B2A3-E6589DD54849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C00C1096-CEF6-4070-B2A3-E6589DD54849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C00C1096-CEF6-4070-B2A3-E6589DD54849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F153F2-5BD5-4AA2-B8E0-0D144EC560E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F153F2-5BD5-4AA2-B8E0-0D144EC560E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F153F2-5BD5-4AA2-B8E0-0D144EC560E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F153F2-5BD5-4AA2-B8E0-0D144EC560E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA6B7AFB-92A7-4B50-B071-A7C69A54AF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6B7AFB-92A7-4B50-B071-A7C69A54AF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6B7AFB-92A7-4B50-B071-A7C69A54AF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6B7AFB-92A7-4B50-B071-A7C69A54AF35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECDB85C9-7471-4C1A-AA87-B018E0080D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECDB85C9-7471-4C1A-AA87-B018E0080D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECDB85C9-7471-4C1A-AA87-B018E0080D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECDB85C9-7471-4C1A-AA87-B018E0080D68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86A2F49C-A3E1-4592-A095-FA28FA7D5021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A2F49C-A3E1-4592-A095-FA28FA7D5021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A2F49C-A3E1-4592-A095-FA28FA7D5021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A2F49C-A3E1-4592-A095-FA28FA7D5021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707B4A79-5E26-4D72-B152-C3A4250F3EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707B4A79-5E26-4D72-B152-C3A4250F3EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707B4A79-5E26-4D72-B152-C3A4250F3EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707B4A79-5E26-4D72-B152-C3A4250F3EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47D0E22C-92A1-4320-B4FB-E5636FC88560} = {69F2289C-16AB-42D0-B1D9-F44F0D6B0ACE}
+		{D729781A-C163-48A4-B538-C2157A9BF613} = {9AA7251B-D1AE-4ACF-90FA-52120BABA6EA}
+		{FE18728B-1E74-44A5-A4B6-03B1C85CB682} = {D729781A-C163-48A4-B538-C2157A9BF613}
+		{C00C1096-CEF6-4070-B2A3-E6589DD54849} = {9AA7251B-D1AE-4ACF-90FA-52120BABA6EA}
+		{71F153F2-5BD5-4AA2-B8E0-0D144EC560E8} = {13A3A997-C3D9-4FD6-A7E7-FA8EF9130D55}
+		{FA6B7AFB-92A7-4B50-B071-A7C69A54AF35} = {13A3A997-C3D9-4FD6-A7E7-FA8EF9130D55}
+		{ECDB85C9-7471-4C1A-AA87-B018E0080D68} = {D5CCEDDB-8CDC-4038-9A69-6BCAF6996D4E}
+		{86A2F49C-A3E1-4592-A095-FA28FA7D5021} = {B2586615-9306-4648-9D53-EB4CA947ACD2}
+		{707B4A79-5E26-4D72-B152-C3A4250F3EF6} = {69F2289C-16AB-42D0-B1D9-F44F0D6B0ACE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0652ADA4-E954-47B7-BE39-D4802442BEB0}
+	EndGlobalSection
+EndGlobal
